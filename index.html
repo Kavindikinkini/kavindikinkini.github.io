@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Kavindi Kinkini | Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+--bg:#fdf8ff;--bg2:#f9f0ff;--surface:#fff;
+--rose:#e8739a;--lilac:#a78bfa;--lavender:#c4b5fd;
+--pink:#f9a8d4;--deep:#7c3aed;--blush:#fce7f3;
+--text:#2d1b4e;--muted:#9882b0;--border:rgba(167,139,250,0.2);
+--shadow:rgba(124,58,237,0.08);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.75;overflow-x:hidden;}
+.blob{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;opacity:.35;}
+.blob1{width:500px;height:500px;background:radial-gradient(circle,#e9d5ff,#fce7f3);top:-150px;right:-100px;}
+.blob2{width:400px;height:400px;background:radial-gradient(circle,#ddd6fe,#fbcfe8);bottom:-100px;left:-80px;}
+.blob3{width:300px;height:300px;background:radial-gradient(circle,#d1fae5,#ddd6fe);top:50%;left:40%;}
+nav{position:fixed;top:0;left:0;width:100%;z-index:100;background:rgba(253,248,255,0.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:60px;}
+.logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--deep);}
+.logo span{color:var(--rose);}
+.nav-links{display:flex;gap:1.8rem;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--rose);}
+section{position:relative;z-index:1;}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 3rem;}
+.hero-chip{display:inline-flex;align-items:center;gap:8px;background:var(--blush);border:1px solid rgba(232,115,154,.25);color:var(--rose);font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:5px 18px;border-radius:100px;margin-bottom:1.8rem;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;line-height:1.05;color:var(--text);margin-bottom:.3rem;}
+.hero h1 em{font-style:italic;background:linear-gradient(135deg,var(--rose),var(--lilac));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-role{font-family:'DM Mono',monospace;font-size:.82rem;color:var(--lilac);letter-spacing:.16em;text-transform:uppercase;margin-bottom:.6rem;}
+.hero-summary{max-width:600px;font-size:1rem;color:var(--muted);margin-bottom:2.5rem;line-height:1.8;}
+.btns{display:flex;gap:.9rem;flex-wrap:wrap;justify-content:center;}
+.btn-p{font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;padding:12px 30px;background:linear-gradient(135deg,var(--rose),var(--lilac));color:#fff;border:none;border-radius:100px;cursor:pointer;text-decoration:none;display:inline-block;transition:all .3s;box-shadow:0 4px 20px rgba(232,115,154,.3);}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(232,115,154,.4);}
+.btn-s{font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;padding:12px 30px;background:transparent;color:var(--deep);border:1.5px solid var(--lavender);border-radius:100px;cursor:pointer;text-decoration:none;display:inline-block;transition:all .3s;}
+.btn-s:hover{background:var(--bg2);border-color:var(--lilac);}
+.scroll-hint{margin-top:3rem;font-family:'DM Mono',monospace;font-size:.66rem;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;animation:bob 2s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+.wrap{padding:5.5rem 2rem;max-width:1000px;margin:0 auto;}
+.s-label{font-family:'DM Mono',monospace;font-size:.66rem;color:var(--rose);letter-spacing:.25em;text-transform:uppercase;margin-bottom:.4rem;display:flex;align-items:center;gap:8px;}
+.s-label::before{content:'';display:inline-block;width:20px;height:1.5px;background:var(--rose);}
+.s-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--text);margin-bottom:2.8rem;}
+.s-title span{font-style:italic;color:var(--rose);}
+.alt-bg{background:linear-gradient(180deg,var(--bg2),var(--bg));}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--lavender),transparent);max-width:1000px;margin:0 auto;}
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:220px 1fr;gap:3.5rem;align-items:center;}
+.avatar-wrap{display:flex;flex-direction:column;align-items:center;gap:1rem;}
+.avatar{width:185px;height:185px;border-radius:60% 40% 55% 45% / 45% 55% 40% 60%;background:linear-gradient(135deg,#f9a8d4,#c4b5fd,#a78bfa);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(167,139,250,.3);animation:morph 7s ease-in-out infinite;}
+@keyframes morph{0%,100%{border-radius:60% 40% 55% 45% / 45% 55% 40% 60%;}33%{border-radius:45% 55% 40% 60% / 60% 40% 55% 45%;}66%{border-radius:55% 45% 60% 40% / 40% 60% 45% 55%;}}
+.av-init{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:#fff;}
+.avatar-badge{background:var(--blush);border:1px solid rgba(232,115,154,.25);color:var(--rose);font-family:'DM Mono',monospace;font-size:.64rem;letter-spacing:.1em;padding:4px 14px;border-radius:100px;text-transform:uppercase;}
+.about-text p{color:var(--muted);margin-bottom:.9rem;font-size:1rem;}
+.stat-row{display:flex;gap:1.2rem;margin-top:1.8rem;flex-wrap:wrap;}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1.1rem;text-align:center;box-shadow:0 2px 12px var(--shadow);}
+.stat-num{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,var(--rose),var(--lilac));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat-lbl{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:2px;}
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:1rem;}
+.sk{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.2rem 1.3rem;transition:all .3s;box-shadow:0 2px 12px var(--shadow);}
+.sk:hover{transform:translateY(-3px);box-shadow:0 8px 28px var(--shadow);border-color:var(--lavender);}
+.sk-cat{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.3rem;}
+.sk-name{font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;color:var(--text);margin-bottom:.7rem;}
+.bar-bg{height:4px;background:#ede9fe;border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--rose),var(--lilac));transition:width 1.4s cubic-bezier(.4,0,.2,1);}
+.sk-pct{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--lilac);margin-top:5px;}
+.soft-grid{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.6rem;}
+.soft-pill{background:var(--blush);color:var(--rose);font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;padding:6px 16px;border-radius:100px;border:1px solid rgba(232,115,154,.2);}
+/* RESEARCH */
+.research-card{background:linear-gradient(135deg,#fdf4ff,#f5f3ff);border:1px solid var(--lavender);border-radius:20px;padding:2rem;position:relative;overflow:hidden;box-shadow:0 4px 24px rgba(167,139,250,.12);}
+.research-card::before{content:'✦ Published · ICACT 2024';position:absolute;top:1.2rem;right:1.5rem;font-family:'DM Mono',monospace;font-size:.62rem;color:var(--lilac);letter-spacing:.1em;background:#ede9fe;padding:4px 12px;border-radius:100px;}
+.research-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--deep);margin-bottom:.6rem;margin-right:12rem;line-height:1.4;}
+.research-venue{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--rose);letter-spacing:.1em;margin-bottom:.9rem;}
+.research-desc{color:var(--muted);font-size:.95rem;}
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.3rem;}
+.proj{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.5rem;transition:all .3s;box-shadow:0 2px 12px var(--shadow);display:flex;flex-direction:column;}
+.proj:hover{transform:translateY(-4px);box-shadow:0 12px 32px var(--shadow);border-color:var(--lavender);}
+.proj.featured{border:1.5px solid var(--lavender);background:linear-gradient(135deg,#fdf8ff,#f5f3ff);}
+.proj-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--blush),#ede9fe);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:.9rem;}
+.proj-tag{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--rose);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.3rem;}
+.proj-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:.5rem;}
+.proj-desc{color:var(--muted);font-size:.88rem;margin-bottom:1.1rem;line-height:1.65;flex:1;}
+.proj-bullets{color:var(--muted);font-size:.84rem;margin-bottom:1rem;padding-left:1rem;}
+.proj-bullets li{margin-bottom:.3rem;line-height:1.55;}
+.techs{display:flex;flex-wrap:wrap;gap:5px;}
+.tech{font-family:'DM Mono',monospace;font-size:.6rem;padding:3px 10px;border-radius:100px;background:#f3e8ff;color:var(--deep);border:1px solid #e9d5ff;}
+.new-badge{display:inline-block;background:linear-gradient(135deg,var(--rose),var(--lilac));color:#fff;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;padding:2px 10px;border-radius:100px;margin-left:8px;vertical-align:middle;}
+/* EDUCATION */
+.edu-list{display:flex;flex-direction:column;gap:1rem;}
+.edu{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.4rem 1.6rem;display:flex;gap:1.5rem;align-items:flex-start;transition:all .3s;box-shadow:0 2px 12px var(--shadow);}
+.edu:hover{border-color:var(--lavender);box-shadow:0 6px 24px var(--shadow);}
+.edu-dot{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--rose),var(--lilac));display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'DM Mono',monospace;font-size:.56rem;color:#fff;font-weight:500;text-align:center;line-height:1.3;padding:4px;}
+.edu-deg{font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:500;color:var(--text);margin-bottom:.2rem;}
+.edu-inst{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--lilac);letter-spacing:.06em;margin-bottom:.3rem;}
+.edu-detail{font-size:.86rem;color:var(--muted);}
+/* EXTRA */
+.ec-list{display:flex;flex-direction:column;gap:.85rem;}
+.ec{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1rem 1.4rem;display:flex;align-items:center;gap:1rem;transition:all .3s;box-shadow:0 2px 8px var(--shadow);}
+.ec:hover{border-color:var(--lavender);}
+.ec-role{font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;color:var(--text);}
+.ec-org{font-family:'DM Mono',monospace;font-size:.66rem;color:var(--muted);letter-spacing:.06em;}
+.ec-yr{font-family:'DM Mono',monospace;font-size:.64rem;color:var(--rose);margin-left:auto;white-space:nowrap;background:var(--blush);padding:3px 10px;border-radius:100px;}
+/* RESUME */
+.resume-box{background:linear-gradient(135deg,#fdf4ff,#f0fdf4);border:1px solid var(--lavender);border-radius:24px;padding:2.5rem;text-align:center;box-shadow:0 4px 24px var(--shadow);}
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
+.cc{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.3rem;display:flex;align-items:center;gap:1rem;transition:all .3s;box-shadow:0 2px 10px var(--shadow);text-decoration:none;}
+.cc:hover{border-color:var(--lavender);transform:translateY(-2px);box-shadow:0 6px 20px var(--shadow);}
+.cc-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--blush),#ede9fe);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.cc-lbl{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px;}
+.cc-val{font-size:.86rem;color:var(--text);font-weight:500;}
+/* REFS */
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;}
+.ref-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.4rem 1.6rem;box-shadow:0 2px 10px var(--shadow);}
+.ref-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--deep);margin-bottom:.3rem;}
+.ref-role{font-family:'DM Sans',sans-serif;font-size:.82rem;color:var(--muted);margin-bottom:.6rem;}
+.ref-email{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--rose);}
+footer{position:relative;z-index:1;padding:2rem;text-align:center;font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.1em;}
+.heart{color:var(--rose);display:inline-block;animation:heartbeat .9s ease-in-out infinite;}
+@keyframes heartbeat{0%,100%{transform:scale(1);}50%{transform:scale(1.3);}}
+@media(max-width:720px){.about-grid{grid-template-columns:1fr;text-align:center;}.stat-row{justify-content:center;}.nav-links{display:none;}.edu{flex-direction:column;}.ec-yr{display:none;}.research-card::before{display:none;}.research-title{margin-right:0;}}
+</style>
+</head>
+<body>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+
+<nav>
+  <div class="logo">Kavindi <span>Kinkini</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-chip">✦ Software Engineer · Researcher · Published Author</div>
+  <h1>Kavindi<br/><em>Kinkini</em></h1>
+  <div class="hero-role">BSc. Software Engineering · University of Plymouth · NSBM</div>
+  <p class="hero-summary">Enthusiastic software engineering undergraduate skilled in building mobile and web applications using modern technologies. Published researcher at ICACT 2024 with a passion for developing innovative solutions to real-world challenges.</p>
+  <div class="btns">
+    <a href="#projects" class="btn-p">✦ View My Work</a>
+    <a href="#contact" class="btn-s">Say Hello ♡</a>
+  </div>
+  <div class="scroll-hint">↓ scroll to explore</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="alt-bg">
+<div class="wrap">
+  <div class="s-label">01 — Identity</div>
+  <div class="s-title">About <span>Me</span></div>
+  <div class="about-grid">
+    <div class="avatar-wrap">
+      <div class="avatar"><div class="av-init">KK</div></div>
+      <div class="avatar-badge">✦ Software Engineer</div>
+    </div>
+    <div class="about-text">
+      <p>Hi there! I'm Kavindi Kinkini — an enthusiastic software engineering undergraduate at NSBM Green University (University of Plymouth affiliated). I love turning complex problems into clean, elegant software solutions.</p>
+      <p>I'm skilled in building mobile and web applications with hands-on experience in full project lifecycles — from design to deployment — with strong analytical and communication skills.</p>
+      <p>I'm especially proud that my research paper <em style="color:var(--deep)">"Enhancing Security with Biometric and Heart Rate Data Integration"</em> was published and presented at <strong style="color:var(--rose)">ICACT 2024</strong> ✨</p>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num">10+</div><div class="stat-lbl">Projects</div></div>
+        <div class="stat"><div class="stat-num">2+</div><div class="stat-lbl">Years</div></div>
+        <div class="stat"><div class="stat-num">1</div><div class="stat-lbl">Publication</div></div>
+        <div class="stat"><div class="stat-num">15+</div><div class="stat-lbl">Tech Skills</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+<div class="wrap">
+  <div class="s-label">02 — Capabilities</div>
+  <div class="s-title">Skills & <span>Tech Stack</span></div>
+  <div class="skills-grid">
+    <div class="sk"><div class="sk-cat">Language</div><div class="sk-name">Java</div><div class="bar-bg"><div class="bar-fill" style="width:0%" data-w="82%"></div></div><div class="sk-pct">82%</div></div>
+    <div class="sk"><div class="sk-cat">Language</div><div class="sk-name">Python</div><div class="bar-bg"><div class="bar-fill" style="width:0%" data-w="80%"></div></div><div class="sk-pct">80%</div></div>
+    <div class="sk"><div class="sk-cat">Language</div><div class="sk-name">JavaScript</div><div class="bar-bg"><div class="bar-fill" style="width:0%" data-w="88%"></div></div><div class="sk-pct">88%</div></div>
+    <div class="sk"><div class="sk-cat">Language</div><div class="sk-name">C / C#</div><div class="bar-bg"><div class="bar-fill" style="width:0%" data-w="70%"></div></div><div class="sk-pct">70%</div></div>
+    <div class="sk"><div class="sk-cat">Frontend</div><div class="sk-name">HTML / CSS</div><div class="bar-bg"><div class="bar-fill" style="width:0%" data-w="92%"></div></div><div class="sk-pct">92%</div></div>
+    <div class="sk"><div class="sk-cat">Frontend</div><div class="sk-name">React.js / Vite</div><div class="bar-bg"><div class="bar-fill" style="width:0%" data-w="80%"></div></div><div class="sk-pct">80%</div></div>
+    <div class="sk"><div class="sk-cat">Backend</div><div class="sk-name">PHP / Laravel</div><div class="bar-bg"><div class="bar-fill" style="width:0%" data-w="83%"></div></div><div class="sk-pct">83%</div></div>
+    <div class="sk"><div class="sk-cat">Backend</div><div class="sk-name">Node.js / Express</div><div class="bar-bg"><div class="bar-fill" style="width:0%" data-w="78%"></div></div><div class="sk-pct">78%</div></div>
+    <div class="sk"><div class="sk-cat">Mobile</div><div class="sk-name">Flutter / Dart</div><div class="bar-bg"><div class="bar-fill" style="width:0%" data-w="78%"></div></div><div class="sk-pct">78%</div></div>
+    <div class="sk"><div class="sk-cat">Database</div><div class="sk-name">MySQL / SQLite</div><div class="bar-bg"><div class="bar-fill" style="width:0%" data-w="83%"></div></div><div class="sk-pct">83%</div></div>
+    <div class="sk"><div class="sk-cat">Database</div><div class="sk-name">MongoDB / Firebase</div><div class="bar-bg"><div class="bar-fill" style="width:0%" data-w="76%"></div></div><div class="sk-pct">76%</div></div>
+    <div class="sk"><div class="sk-cat">3D / Design</div><div class="sk-name">Three.js / Figma</div><div class="bar-bg"><div class="bar-fill" style="width:0%" data-w="70%"></div></div><div class="sk-pct">70%</div></div>
+    <div class="sk"><div class="sk-cat">Tools</div><div class="sk-name">Git / VS Code</div><div class="bar-bg"><div class="bar-fill" style="width:0%" data-w="85%"></div></div><div class="sk-pct">85%</div></div>
+    <div class="sk"><div class="sk-cat">Real-time</div><div class="sk-name">Socket.io</div><div class="bar-bg"><div class="bar-fill" style="width:0%" data-w="72%"></div></div><div class="sk-pct">72%</div></div>
+  </div>
+  <div style="margin-top:2.5rem;">
+    <div class="s-label" style="margin-bottom:.9rem;">Core Competencies</div>
+    <div class="soft-grid">
+      <span class="soft-pill">🤝 Teamwork & Leadership</span>
+      <span class="soft-pill">✨ Creativity</span>
+      <span class="soft-pill">🧩 Problem-Solving</span>
+      <span class="soft-pill">💬 Communication</span>
+      <span class="soft-pill">🌿 Adaptability</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RESEARCH -->
+<section id="research" class="alt-bg">
+<div class="wrap">
+  <div class="s-label">02.5 — Research</div>
+  <div class="s-title">Published <span>Research</span></div>
+  <div class="research-card">
+    <div class="research-title">"Enhancing Security with Biometric and Heart Rate Data Integration"</div>
+    <div class="research-venue">📄 International Conference on Advanced Communication Technology — ICACT 2024</div>
+    <div class="research-desc">Explored the integration of biometric and heart rate data to enhance real-world security authentication systems. This research contributed a meaningful innovation to the IT security field and was both presented and published at an international conference.</div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+<div class="wrap">
+  <div class="s-label">03 — Portfolio</div>
+  <div class="s-title">My <span>Projects</span></div>
+  <div class="proj-grid">
+
+    <!-- NEW FEATURED PROJECTS -->
+    <div class="proj featured">
+      <div class="proj-icon">🌿</div>
+      <div class="proj-tag">Full-Stack Web · Event Management</div>
+      <div class="proj-name">Green Events <span class="new-badge">New</span></div>
+      <ul class="proj-bullets">
+        <li>Full-stack app for managing events at NSBM Green University — creation, registration & real-time updates.</li>
+        <li>User authentication with JWT, file/image uploads, real-time notifications via Socket.io, and 3D visual elements.</li>
+      </ul>
+      <div class="techs"><span class="tech">React.js</span><span class="tech">Vite</span><span class="tech">Node.js</span><span class="tech">Express.js</span><span class="tech">MongoDB</span><span class="tech">Socket.io</span><span class="tech">JWT</span><span class="tech">Multer</span></div>
+    </div>
+
+    <div class="proj featured">
+      <div class="proj-icon">🛋️</div>
+      <div class="proj-tag">Full-Stack Web · HCI · 3D Visualizer</div>
+      <div class="proj-name">RoomPilot <span class="new-badge">New</span></div>
+      <ul class="proj-bullets">
+        <li>Interactive furniture layout visualizer — customers browse furniture and visualise placements in 2D & immersive 3D room views.</li>
+        <li>Backend handles authentication, data persistence with SQLite, and secure API access via JWT.</li>
+      </ul>
+      <div class="techs"><span class="tech">React.js</span><span class="tech">Three.js</span><span class="tech">React Konva</span><span class="tech">Tailwind</span><span class="tech">Node.js</span><span class="tech">SQLite</span><span class="tech">JWT</span></div>
+    </div>
+
+    <div class="proj"><div class="proj-icon">🏥</div><div class="proj-tag">Web · Public Health</div><div class="proj-name">Safe Serve</div><div class="proj-desc">Platform for Public Health Inspectors to conduct digital food safety audits and generate hotel ratings.</div><div class="techs"><span class="tech">PHP</span><span class="tech">MySQL</span><span class="tech">HTML</span><span class="tech">CSS</span></div></div>
+    <div class="proj"><div class="proj-icon">💡</div><div class="proj-tag">Web · IoT</div><div class="proj-name">Lumi Smart</div><div class="proj-desc">Smart lighting control system for efficient energy management and home automation.</div><div class="techs"><span class="tech">JavaScript</span><span class="tech">Node.js</span><span class="tech">Firebase</span></div></div>
+    <div class="proj"><div class="proj-icon">📱</div><div class="proj-tag">Mobile · Collaboration</div><div class="proj-name">Team Sync</div><div class="proj-desc">Mobile app enabling real-time team collaboration and task management for remote teams.</div><div class="techs"><span class="tech">Flutter</span><span class="tech">Firebase</span><span class="tech">Dart</span></div></div>
+    <div class="proj"><div class="proj-icon">🌬️</div><div class="proj-tag">Web · Analytics</div><div class="proj-name">Airlytics</div><div class="proj-desc">Data analytics dashboard for monitoring air quality and environmental metrics in real time.</div><div class="techs"><span class="tech">Laravel</span><span class="tech">PHP</span><span class="tech">Chart.js</span><span class="tech">MySQL</span></div></div>
+    <div class="proj"><div class="proj-icon">🛍️</div><div class="proj-tag">Web · Retail</div><div class="proj-name">Smart POS</div><div class="proj-desc">Intuitive point-of-sale solution for retail businesses with inventory and billing management.</div><div class="techs"><span class="tech">PHP</span><span class="tech">MySQL</span><span class="tech">JavaScript</span></div></div>
+    <div class="proj"><div class="proj-icon">🎬</div><div class="proj-tag">Web · Entertainment</div><div class="proj-name">Filmor Cinema</div><div class="proj-desc">Movie ticket booking and seat reservation platform for cinema management.</div><div class="techs"><span class="tech">PHP</span><span class="tech">HTML</span><span class="tech">CSS</span><span class="tech">MySQL</span></div></div>
+    <div class="proj"><div class="proj-icon">🌸</div><div class="proj-tag">Web · Wellness</div><div class="proj-name">Aura Serene</div><div class="proj-desc">Wellness and therapy appointment booking system for mental health professionals.</div><div class="techs"><span class="tech">PHP</span><span class="tech">MySQL</span><span class="tech">HTML</span><span class="tech">CSS</span></div></div>
+    <div class="proj"><div class="proj-icon">🔧</div><div class="proj-tag">Web · Automotive</div><div class="proj-name">Garage Management</div><div class="proj-desc">All-in-one solution for managing garage operations including vehicle tracking and service history.</div><div class="techs"><span class="tech">PHP</span><span class="tech">MySQL</span><span class="tech">C#</span></div></div>
+
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section id="education" class="alt-bg">
+<div class="wrap">
+  <div class="s-label">04 — Background</div>
+  <div class="s-title">My <span>Education</span></div>
+  <div class="edu-list">
+    <div class="edu">
+      <div class="edu-dot">2023 NOW</div>
+      <div>
+        <div class="edu-deg">BSc. (Hons) Software Engineering</div>
+        <div class="edu-inst">University of Plymouth · delivered via NSBM Green University, Sri Lanka</div>
+        <div class="edu-detail">Specialising in full-stack development, mobile apps, HCI, AI/security research, and software architecture.</div>
+      </div>
+    </div>
+    <div class="edu">
+      <div class="edu-dot">2023</div>
+      <div>
+        <div class="edu-deg">Certificate Course in Computer Application</div>
+        <div class="edu-inst">Information Technology and Distance Learning Hub</div>
+        <div class="edu-detail">Foundational certification covering core computing and application development.</div>
+      </div>
+    </div>
+    <div class="edu">
+      <div class="edu-dot">2022</div>
+      <div>
+        <div class="edu-deg">G.C.E. Advanced Level — Physical Science</div>
+        <div class="edu-inst">Mahamaya Girls' School, Nugegoda</div>
+        <div class="edu-detail">Science stream with focus on Mathematics, Physics, and Information Technology.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXTRA -->
+<section id="extra">
+<div class="wrap">
+  <div class="s-label">05 — Beyond Academics</div>
+  <div class="s-title">Activities & <span>Leadership</span></div>
+  <div class="ec-list">
+    <div class="ec"><div style="font-size:1.2rem">🌸</div><div><div class="ec-role">Assistant Director, Aesthetic Department — Students' Wellbeing Association</div><div class="ec-org">NSBM Green University</div></div><div class="ec-yr">2025</div></div>
+    <div class="ec"><div style="font-size:1.2rem">💃</div><div><div class="ec-role">Member — Dancing Club</div><div class="ec-org">NSBM Green University</div></div><div class="ec-yr">2023 — Present</div></div>
+    <div class="ec"><div style="font-size:1.2rem">⚡</div><div><div class="ec-role">Volunteer — IEEE Student Branch · NSBM Circularity & Sustainability Community · Volunteer Club · Mathematics & Statistics Circle</div><div class="ec-org">NSBM Green University</div></div><div class="ec-yr">2023 — Present</div></div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RESUME -->
+<section id="resume" class="alt-bg">
+<div class="wrap">
+  <div class="s-label">06 — Download</div>
+  <div class="s-title">My <span>Resume</span></div>
+  <div class="resume-box">
+    <div style="font-size:2.5rem;margin-bottom:.8rem;">📄</div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--deep);margin-bottom:.5rem;">Kavindi_Kinkini_ATS_CV.pdf</div>
+    <div style="font-size:.95rem;color:var(--muted);margin-bottom:1.8rem;">Full overview of my projects, education, skills, and published research — ATS-optimised and ready to share.</div>
+    <a href="Kavindi_Kinkini_ATS_CV.docx" class="btn-p" download>✦ Download CV</a>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+<div class="wrap">
+  <div class="s-label">07 — Connect</div>
+  <div class="s-title">Say <span>Hello ♡</span></div>
+  <p style="color:var(--muted);margin-bottom:2rem;max-width:500px;font-size:1rem;">Ready to collaborate, work together, or just have a chat about tech and ideas? I'd love to connect!</p>
+  <div class="contact-grid">
+    <a href="mailto:kinkinikav@gmail.com" class="cc"><div class="cc-icon">✉️</div><div><div class="cc-lbl">Email</div><div class="cc-val">kinkinikav@gmail.com</div></div></a>
+    <a href="https://linkedin.com/in/kavindi-kinkini" target="_blank" class="cc"><div class="cc-icon">💼</div><div><div class="cc-lbl">LinkedIn</div><div class="cc-val">Kavindi Kinkini</div></div></a>
+    <a href="https://github.com/Kavindikinkini" target="_blank" class="cc"><div class="cc-icon">🐙</div><div><div class="cc-lbl">GitHub</div><div class="cc-val">github.com/Kavindikinkini</div></div></a>
+    <a href="tel:+94785134587" class="cc"><div class="cc-icon">📞</div><div><div class="cc-lbl">Phone</div><div class="cc-val">+94 785 134 587</div></div></a>
+    <div class="cc"><div class="cc-icon">📍</div><div><div class="cc-lbl">Location</div><div class="cc-val">Homagama, Sri Lanka</div></div></div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- REFS -->
+<section id="references" class="alt-bg">
+<div class="wrap">
+  <div class="s-label">08 — References</div>
+  <div class="s-title">My <span>References</span></div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div style="font-size:1.5rem;margin-bottom:.6rem;">👩‍🏫</div>
+      <div class="ref-name">Dr. Mohamed Shafraz</div>
+      <div class="ref-role">Senior Lecturer, Faculty of Computing · NSBM Green University</div>
+      <div class="ref-email">✉ shafraz@nsbm.ac.lk</div>
+    </div>
+    <div class="ref-card">
+      <div style="font-size:1.5rem;margin-bottom:.6rem;">👨‍🏫</div>
+      <div class="ref-name">Mr. Gayan Perera</div>
+      <div class="ref-role">Lecturer, Faculty of Computing · NSBM Green University</div>
+      <div class="ref-email">✉ gayanp@nsbm.ac.lk</div>
+    </div>
+  </div>
+  <p style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);margin-top:1.2rem;letter-spacing:.06em;">✦ Full contact details available upon request.</p>
+</div>
+</section>
+
+<footer>
+  Made with <span class="heart">♡</span> by Kavindi Kinkini &nbsp;·&nbsp; © 2026 &nbsp;·&nbsp; Homagama, Sri Lanka
+</footer>
+
+<script>
+window.addEventListener('load',function(){
+  setTimeout(function(){
+    document.querySelectorAll('.bar-fill').forEach(function(b){
+      b.style.width=b.getAttribute('data-w');
+    });
+  },300);
+});
+</script>
+</body>
+</html>
